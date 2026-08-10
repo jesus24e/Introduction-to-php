@@ -28,7 +28,7 @@
 
     echo "el array contiene ".count($frutas1)." elementos.";
 
-    //echo sort($frutas1);
+    echo sort($frutas1);
     //echo rsort($frutas1);
     print_r($frutas1);
 ?>
