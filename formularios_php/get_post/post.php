@@ -1,0 +1,1 @@
+hola <?php echo $_POST["nombre"]//informacion en el body en lugar de en la url como si fuese get?>
