@@ -1,0 +1,20 @@
+# Dependencias de Composer
+vendor/
+
+# Archivo de configuración de Composer
+composer.lock
+
+# Variables de entorno y credenciales
+.env
+config.php
+
+# Archivos de caché y logs
+*.log
+cache/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de VS Code
+.vscode/
