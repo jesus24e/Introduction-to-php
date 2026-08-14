@@ -19,3 +19,40 @@
     mysqli_close($connection);
 
 ?>
+
+<?php
+
+$host = "localhost";
+$user = "root";
+$password = "";
+$db = "test_php";
+
+
+$connection = mysqli_connect($host,$user,$password,$db);
+    
+if($connection){
+    echo "online";
+}else{
+    echo "algo salio mal, error: ". mysqli_connect_error();
+
+}
+
+$query = "select * from empleados";
+$result = "";
+
+try {
+    $result = mysqli_query($connection,$query);
+    echo "consulta realizada correctamente.";
+} catch (Exception $e) {
+    echo "error, algo salio mal: ",$e->getMessage();
+}
+
+$content = mysqli_fetch_all($result);
+
+foreach($content as $row){
+    foreach ($row as $col) {
+        echo $col;
+    }
+    echo "<br>";
+}
+?>
