@@ -4,9 +4,7 @@
     $client = new MongoDB\Client("mongodb://localhost:27017");
     $db = $client->selectDatabase("database");
 
-    $colecciones = [
-    "collection" => $db->selectCollection("collection"),
-    ];
+    $col = $db->selectCollection("collection");
 
     $document = array(
         [
@@ -66,15 +64,62 @@
         ?$col->countDocuments(["age" => ['$gt' => 18]]);
     */
 
-    
-    echo $colecciones["collection"]->insertMany($document)?"correcto":"";
+    //? INSERT MANY — insertar múltiples documentos
+    $col->insertMany($document);
+    echo "insertMany: correcto <br><br>";
 
-    $cursor = $colecciones["collection"]->find(["age" => ['$gt' => 28]]);
+    //? INSERT ONE — insertar un documento
+    $col->insertOne(["name" => "user3", "age" => 27, "email" => "u3@gmail.com"]);
+    echo "insertOne: correcto <br><br>";
 
+    //? FIND — leer todos los documentos con filtro
+    echo "find (age > 28): <br>";
+    $cursor = $col->find(["age" => ['$gt' => 28]]);
     foreach($cursor as $doc){
-        echo "<br>".$doc["name"];
-        echo "<br>".$doc["age"];
-        echo "<br>".$doc["email"];
+        echo $doc["name"] . " — " . $doc["age"] . " — " . $doc["email"] . "<br>";
     }
 
+    //? FIND ONE — leer el primer documento que coincide
+    echo "<br>findOne (name = user1): <br>";
+    $doc = $col->findOne(["name" => "user1"]);
+    echo $doc["name"] . " — " . $doc["age"] . " — " . $doc["email"] . "<br>";
+
+    //? UPDATE ONE — actualizar un documento
+    $col->updateOne(
+        ["name" => "user1"],
+        ['$set' => ["age" => 99]]
+    );
+    echo "<br>updateOne: user1 age actualizado a 99 <br>";
+
+    //? UPDATE MANY — actualizar múltiples documentos
+    $col->updateMany(
+        ["age" => ['$lt' => 30]],
+        ['$set' => ["status" => "joven"]]
+    );
+    echo "updateMany: status 'joven' agregado a menores de 30 <br>";
+
+    //? REPLACE ONE — reemplaza el documento completo
+    $col->replaceOne(
+        ["name" => "user3"],
+        ["name" => "user3_reemplazado", "age" => 40, "email" => "u3new@gmail.com"]
+    );
+    echo "replaceOne: user3 reemplazado <br>";
+
+    //? COUNT — contar documentos
+    $total = $col->countDocuments([]);
+    $mayores = $col->countDocuments(["age" => ['$gt' => 28]]);
+    echo "<br>total documentos: $total <br>";
+    echo "mayores de 28: $mayores <br>";
+
+    //? DELETE ONE — eliminar un documento
+    $col->deleteOne(["name" => "user3_reemplazado"]);
+    echo "<br>deleteOne: user3_reemplazado eliminado <br>";
+
+    //? DELETE MANY — eliminar múltiples documentos
+    $col->deleteMany(["age" => ['$gt' => 90]]);
+    echo "deleteMany: documentos con age > 90 eliminados <br>";
+
+    //? DISTINCT — valores únicos de un campo
+    $edades = $col->distinct("age", []);
+    echo "<br>distinct ages: " . implode(", ", $edades) . "<br>";
 ?>
