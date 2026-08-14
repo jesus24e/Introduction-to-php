@@ -1,5 +1,12 @@
 <?php
 
+/**
+    **$objeto->elemento       → elemento o funcion de una INSTANCIA
+    **Clase::elemento         → elemento o funcion de una CLASE
+    **self::elemento          → elemento o funcion de LA CLASE ACTUAL
+    **parent::elemento        → elemento o funcion de LA CLASE PADRE
+ */
+
 class miclase{
     const const_value = "hola mundo";
 }
