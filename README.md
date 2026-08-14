@@ -22,29 +22,38 @@ Repositorio personal de ejercicios prácticos para aprender PHP desde los fundam
 | [`estructuras_de_control`](estructuras_de_control) | Decisiones y flujo de ejecución con `if`, `switch`, operadores lógicos, ciclos `while`, `for` y `foreach`, además de `break` y `continue`. | `condicional_if.php`, `switch.php`, `for_each.php` |
 | [`funciones_php`](funciones_php) | Declaración de funciones, parámetros, respuesta a formularios y alcance de variables con `global`. | `definiendo_funciones.php`, `global_scope.php` |
 | [`formularios_php`](formularios_php) | PHP embebido en HTML, envío de datos, validación y saneamiento de entradas, reutilización con `include`/`require` y lectura de archivos. | `get_post/`, `validacion_datos/`, `include_require/`, `manejo_de_archivos.php` |
-| [`bases_de_datos_php`](bases_de_datos_php) | Acceso a MySQL mediante MySQLi y PDO: conexión, creación de tablas, consultas, registros y sentencias preparadas. | `mysqli/`, `pdo/conexion_pdo.php`, `pdo/creacion_tabla_registro.php` |
+| [`bases_de_datos_php`](bases_de_datos_php) | Acceso a MySQL con MySQLi y PDO, además de MongoDB: conexión, CRUD, sentencias preparadas, transacciones y generación de respaldos SQL. | `mysqli/`, `pdo/`, `mongodb/`, `transacciones_sql.php` |
 | [`conceptos_avanzados`](conceptos_avanzados) | Callbacks, funciones anónimas, `traits`, tipado, filtros, fecha y hora, JSON y operaciones FTP. | `callback.php`, `traits.php`, `type_hint.php`, `json_encode_decode.php` |
 | [`POO_php`](POO_php) | Programación orientada a objetos: clases, objetos, interfaces, clases abstractas y anónimas, clonación y miembros estáticos. | `claseObjeto.php`, `interfaces.php`, `claseAbstracta.php`, `clonar_objetos.php` |
 | [`namespaces`](namespaces) | Organización lógica de clases mediante namespaces, subnamespaces y referencias de nombres completamente calificadas. | `namespaces.php` |
 | [`sesiones`](sesiones) | Inicio, almacenamiento, lectura y destrucción de datos de sesión con `$_SESSION`. | `sesion.php`, `sesionVariables.php` |
 | [`ciberseguridad_php`](ciberseguridad_php) | Seguridad práctica: hashes de contraseñas, cookies, filtros, validación de nombres de archivo, operaciones de archivos y caché básica de salida. | `codigo_asegurado.php`, `hash.php`, `cookies.php`, `filtros/` |
 | [`estructuras_avanzadas`](estructuras_avanzadas) | Referencias, generadores con `yield` y estructuras SPL de pila (LIFO) y cola (FIFO). | `referencias.php`, `generadores.php`, `estructura_de_pila.php` |
-| [`testing_rendimiento`](testing_rendimiento) | Pruebas de excepciones y exploración de errores de PHP, incluidos `notice`, `warning`, errores de parseo y errores fatales. | `get_message_code.php`, `errores/errores.php` |
+| [`expresioes_regulares`](expresioes_regulares) | Uso de expresiones regulares con `preg_match` para buscar y validar texto, correos, URLs, fechas y otros patrones. | `exp_reg.php` |
+| [`manejo_errores`](manejo_errores) | Manejo de excepciones, códigos y mensajes de error, tipos de errores de PHP y configuración de visibilidad según el entorno. | `get_message_code.php`, `forma_de_mostrar_errores.php`, `errores/` |
+| [`tabla_dinamica_php`](tabla_dinamica_php) | Consulta MySQLi y presentación dinámica de registros en una tabla HTML. | `tabla_dinamica.php` |
 
 ## Estructura del proyecto
 
 ```text
 Introduction-to-php/
 ├── bases_de_datos_php/
+│   ├── mongodb/
+│   │   ├── consulta_mongo.php
+│   │   ├── funciones_mongo_crud.php
+│   │   └── nosql.php
 │   ├── mysqli/
 │   │   ├── actualizar_registros.php
 │   │   ├── borrar_registros.php
 │   │   ├── creacion_db.php
 │   │   ├── ejemplo_conexion.php
 │   │   └── leer_db.php
-│   └── pdo/
+│   ├── pdo/
+│       ├── conexion_prepare.php
 │       ├── conexion_pdo.php
 │       └── creacion_tabla_registro.php
+│   ├── backup.php
+│   └── transacciones_sql.php
 ├── ciberseguridad_php/
 │   ├── archivos/
 │   │   ├── archivo.txt
@@ -61,6 +70,7 @@ Introduction-to-php/
 │   ├── codigo_asegurado.php
 │   ├── cookies.php
 │   └── hash.php
+├── composer.json
 ├── conceptos_avanzados/
 │   ├── callback.php
 │   ├── fecha_hora.php
@@ -83,6 +93,8 @@ Introduction-to-php/
 │   ├── estructuras_de_cola.php
 │   ├── generadores.php
 │   └── referencias.php
+├── expresioes_regulares/
+│   └── exp_reg.php
 ├── formularios_php/
 │   ├── get_post/
 │   │   ├── formulario.php
@@ -92,7 +104,8 @@ Introduction-to-php/
 │   │   ├── header.php
 │   │   └── index.php
 │   ├── validacion_datos/
-│   │   └── formulario_validacion.php
+│   │   ├── formulario_validacion.php
+│   │   └── funciones_validacion.php
 │   ├── manejo_de_archivos.php
 │   ├── miarchivo.txt
 │   └── php_embedido.php
@@ -101,6 +114,12 @@ Introduction-to-php/
 │   └── global_scope.php
 ├── introduccion_php/
 │   └── script1.php
+├── manejo_errores/
+│   ├── errores/
+│   │   ├── errores.php
+│   │   └── parse_error.php
+│   ├── forma_de_mostrar_errores.php
+│   └── get_message_code.php
 ├── namespaces/
 │   └── namespaces.php
 ├── POO_php/
@@ -122,21 +141,19 @@ Introduction-to-php/
 │   ├── operadores.php
 │   ├── otros_num.php
 │   └── strings.php
-└── testing_rendimiento/
-    ├── errores/
-    │   ├── errores.php
-    │   └── parse_error.php
-    └── get_message_code.php
+└── tabla_dinamica_php/
+    └── tabla_dinamica.php
 ```
 
 ## Requisitos
 
 | Herramienta | Uso |
 | --- | --- |
-| PHP 7.4 o superior | Ejecutar los ejercicios. Las funciones flecha usadas en callbacks y algunas propiedades tipadas de POO requieren PHP 7.4+. |
+| PHP 8.0 o superior | Ejecutar los ejercicios. Las funciones de validación incluyen `str_contains`, `str_starts_with` y `str_ends_with`, disponibles desde PHP 8. |
 | XAMPP, Laragon, WampServer o equivalente | Servidor web local con PHP; XAMPP también facilita el uso de Apache y MySQL. |
 | MySQL/MariaDB | Necesario únicamente para los ejercicios de `bases_de_datos_php`. |
 | Extensiones `mysqli`, `pdo_mysql` y `ftp` | `mysqli` y `pdo_mysql` se requieren para sus respectivos ejemplos de base de datos; `ftp` se usa solo en `conceptos_avanzados/ftp.php`. |
+| Composer, MongoDB y extensión `mongodb` | Necesarios únicamente para `bases_de_datos_php/mongodb/`; la dependencia `mongodb/mongodb` está declarada en `composer.json`. |
 
 ## Instalación y uso
 
@@ -166,6 +183,8 @@ Introduction-to-php/
 
 5. Para los ejemplos MySQLi, ejecuta primero `bases_de_datos_php/mysqli/creacion_db.php`. Este crea la base `test_php`, la tabla `empleados` y un registro de muestra; después puedes probar la lectura, actualización y eliminación. Los ejemplos de `bases_de_datos_php/pdo/` usan esa base y muestran consultas y registros con PDO.
 
+6. Para los ejemplos de MongoDB, instala las dependencias con `composer install`, habilita la extensión `mongodb` de PHP y asegúrate de tener el servidor MongoDB en ejecución. El archivo `bases_de_datos_php/mongodb/nosql.php` incluye una guía de instalación para XAMPP en Windows.
+
 ## Aprendizajes destacados
 
 Los propios comentarios de los ejercicios recogen estas ideas importantes:
@@ -185,6 +204,10 @@ Los propios comentarios de los ejercicios recogen estas ideas importantes:
 | Contraseñas y archivos | Usa `password_hash` para hashes y valida tanto el usuario como el nombre de archivo para reducir riesgos de rutas maliciosas. |
 | Generadores y SPL | `yield` pausa y reanuda una función para iterar eficientemente; `SplStack` implementa LIFO y `SplQueue`, FIFO. |
 | Errores | Los ejemplos diferencian avisos, advertencias, excepciones, errores de parseo y errores fatales para entender su efecto en la ejecución. |
+| Expresiones regulares | `preg_match` permite buscar y validar patrones; las anclas, modificadores, cuantificadores y clases de caracteres definen reglas precisas. |
+| Transacciones y respaldos | Desactiva el autocommit para agrupar operaciones y usa `commit` o `rollback` según el resultado; un respaldo puede generar sentencias SQL descargables. |
+| MongoDB | La biblioteca se instala con Composer y sus colecciones permiten CRUD, filtros con operadores, conteos y valores distintos. |
+| Entornos | La visualización de errores debe habilitarse en desarrollo y desactivarse en producción para no exponer información sensible. |
 
 ## Notas de uso
 
