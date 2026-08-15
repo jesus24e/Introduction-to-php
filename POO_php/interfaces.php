@@ -1,5 +1,7 @@
 <?php
 
+namespace interface;
+
 interface Animal{
     public function hacerSonido();
 }
