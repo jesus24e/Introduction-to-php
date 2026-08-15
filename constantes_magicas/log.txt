@@ -1,0 +1,1 @@
+15-08-2026- 05:23:25 ::: error. debe tener nombre. error en el archivo C:\xampp\htdocs\Introduction-to-php\constantes_magicas\constantes_magicas.php, en la linea 10, en la clase Cat, en el metodo myUtilities::sayMyName, en el trait myUtilities
