@@ -24,19 +24,22 @@ Repositorio personal de ejercicios prácticos para aprender PHP desde los fundam
 | [`formularios_php`](formularios_php) | PHP embebido en HTML, envío de datos, validación y saneamiento de entradas, reutilización con `include`/`require` y lectura de archivos. | `get_post/`, `validacion_datos/`, `include_require/`, `manejo_de_archivos.php` |
 | [`bases_de_datos_php`](bases_de_datos_php) | Acceso a MySQL con MySQLi y PDO, además de MongoDB: conexión, CRUD, sentencias preparadas, transacciones y generación de respaldos SQL. | `mysqli/`, `pdo/`, `mongodb/`, `transacciones_sql.php` |
 | [`conceptos_avanzados`](conceptos_avanzados) | Callbacks, funciones anónimas, `traits`, tipado, filtros, fecha y hora, JSON y operaciones FTP. | `callback.php`, `traits.php`, `type_hint.php`, `json_encode_decode.php` |
-| [`POO_php`](POO_php) | Programación orientada a objetos: clases, objetos, interfaces, clases abstractas y anónimas, clonación y miembros estáticos. | `claseObjeto.php`, `interfaces.php`, `claseAbstracta.php`, `clonar_objetos.php` |
-| [`namespaces`](namespaces) | Organización lógica de clases mediante namespaces, subnamespaces y referencias de nombres completamente calificadas. | `namespaces.php` |
+| [`POO_php`](POO_php) | Programación orientada a objetos: clases, objetos, herencia, interfaces, visibilidad, clases abstractas, finales y anónimas, clonación, miembros estáticos y métodos mágicos. | `declaracion_clase.php`, `herencia.php`, `private_protected_public.php`, `metodo_magico_call.php` |
+| [`namespaces`](namespaces) | Organización lógica de clases mediante namespaces, subnamespaces, importaciones con `use` y referencias de nombres completamente calificadas. | `namespaces.php`, `myclass.php`, `namespace2.php` |
 | [`sesiones`](sesiones) | Inicio, almacenamiento, lectura y destrucción de datos de sesión con `$_SESSION`. | `sesion.php`, `sesionVariables.php` |
 | [`ciberseguridad_php`](ciberseguridad_php) | Seguridad práctica: hashes de contraseñas, cookies, filtros, validación de nombres de archivo, operaciones de archivos y caché básica de salida. | `codigo_asegurado.php`, `hash.php`, `cookies.php`, `filtros/` |
 | [`estructuras_avanzadas`](estructuras_avanzadas) | Referencias, generadores con `yield` y estructuras SPL de pila (LIFO) y cola (FIFO). | `referencias.php`, `generadores.php`, `estructura_de_pila.php` |
 | [`expresioes_regulares`](expresioes_regulares) | Uso de expresiones regulares con `preg_match` para buscar y validar texto, correos, URLs, fechas y otros patrones. | `exp_reg.php` |
 | [`manejo_errores`](manejo_errores) | Manejo de excepciones, códigos y mensajes de error, tipos de errores de PHP y configuración de visibilidad según el entorno. | `get_message_code.php`, `forma_de_mostrar_errores.php`, `errores/` |
 | [`tabla_dinamica_php`](tabla_dinamica_php) | Consulta MySQLi y presentación dinámica de registros en una tabla HTML. | `tabla_dinamica.php` |
+| [`constantes_magicas`](constantes_magicas) | Uso de constantes mágicas para obtener contexto de ejecución y registrar errores en un archivo de log. | `constantes_magicas.php`, `log.txt` |
+| [`modulos_require_include`](modulos_require_include) | Reutilización de código con `require_once` y carga automática de clases mediante `spl_autoload_register`. | `index.php`, `autoload/` |
 
 ## Estructura del proyecto
 
 ```text
 Introduction-to-php/
+├── .gitignore
 ├── bases_de_datos_php/
 │   ├── mongodb/
 │   │   ├── consulta_mongo.php
@@ -49,9 +52,9 @@ Introduction-to-php/
 │   │   ├── ejemplo_conexion.php
 │   │   └── leer_db.php
 │   ├── pdo/
-│       ├── conexion_prepare.php
-│       ├── conexion_pdo.php
-│       └── creacion_tabla_registro.php
+│   │   ├── conexion_prepare.php
+│   │   ├── conexion_pdo.php
+│   │   └── creacion_tabla_registro.php
 │   ├── backup.php
 │   └── transacciones_sql.php
 ├── ciberseguridad_php/
@@ -80,6 +83,9 @@ Introduction-to-php/
 │   ├── json_encode_decode.php
 │   ├── traits.php
 │   └── type_hint.php
+├── constantes_magicas/
+│   ├── constantes_magicas.php
+│   └── log.txt
 ├── estructuras_de_control/
 │   ├── break_continue.php
 │   ├── condicional_if.php
@@ -120,15 +126,37 @@ Introduction-to-php/
 │   │   └── parse_error.php
 │   ├── forma_de_mostrar_errores.php
 │   └── get_message_code.php
+├── modulos_require_include/
+│   ├── autoload/
+│   │   ├── autoload.php
+│   │   ├── index.php
+│   │   └── perro.php
+│   ├── db.php
+│   ├── format.php
+│   └── index.php
 ├── namespaces/
+│   ├── myclass.php
+│   ├── namespace2.php
 │   └── namespaces.php
 ├── POO_php/
 │   ├── claseAbstracta.php
 │   ├── claseAnonima.php
 │   ├── claseObjeto.php
+│   ├── clase_final.php
+│   ├── class_exists.php
 │   ├── clonar_objetos.php
+│   ├── constantes.php
+│   ├── declaracion_clase.php
+│   ├── get_class_methods.php
+│   ├── herencia.php
 │   ├── interfaces.php
-│   └── operador_resolucion_ambitos.php
+│   ├── metodo_destruct.php
+│   ├── metodo_magico_call.php
+│   ├── metodos_propiedades_estaticas.php
+│   ├── operador_resolucion_ambitos.php
+│   ├── private_protected_public.php
+│   ├── to_string_objetos.php
+│   └── traits.php
 ├── sesiones/
 │   ├── sesion.php
 │   └── sesionVariables.php
@@ -208,6 +236,10 @@ Los propios comentarios de los ejercicios recogen estas ideas importantes:
 | Transacciones y respaldos | Desactiva el autocommit para agrupar operaciones y usa `commit` o `rollback` según el resultado; un respaldo puede generar sentencias SQL descargables. |
 | MongoDB | La biblioteca se instala con Composer y sus colecciones permiten CRUD, filtros con operadores, conteos y valores distintos. |
 | Entornos | La visualización de errores debe habilitarse en desarrollo y desactivarse en producción para no exponer información sensible. |
+| POO | La visibilidad controla el acceso a los miembros; la herencia reutiliza comportamiento y `final` impide extender una clase o sobrescribir un método. |
+| Métodos mágicos | `__call` permite responder a métodos inaccesibles y `__toString` define cómo se representa un objeto como cadena. |
+| Constantes mágicas | `__FILE__`, `__LINE__`, `__CLASS__`, `__METHOD__` y `__TRAIT__` aportan contexto útil para registrar y depurar errores. |
+| Módulos y autoload | `require_once` evita cargar un archivo más de una vez; `spl_autoload_register` carga clases bajo demanda según su nombre. |
 
 ## Notas de uso
 
@@ -217,4 +249,4 @@ Los propios comentarios de los ejercicios recogen estas ideas importantes:
 
 ---
 
-Hecho solo para practicar entender PHP.
+Hecho solo para practicar y entender PHP.
